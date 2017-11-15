@@ -10,14 +10,14 @@ class configClass {
     private $serverName;
     private $serverIP;
     private $adminEmail;
-    private $adminTel;
+    //private $adminTel;
     private $liveSendEmailAddress;
-    private $liveSendSmsAddress;
+    //private $liveSendSmsAddress;
     private $pathToLockFolder;
-    private $logToMonitor;
+    //private $logToMonitor;
     private $logToConsole;
     private $logToFile;
-    private $logToDatabase;
+    //private $logToDatabase;
     private $log;
     private $pathToLogFileFolder;
     private $liveSendEmailOnError;
@@ -64,24 +64,12 @@ class configClass {
         return $this->adminEmail;
     }
 
-    public function get_adminTel() {
-        return $this->adminTel;
-    }
-
     public function get_liveSendEmailAddress() {
         return $this->liveSendEmailAddress;
     }
 
-    public function get_liveSendSmsAdress() {
-        return $this->liveSendSmsAddress;
-    }
-
     public function get_pathToLockFolder() {
         return $this->pathToLockFolder;
-    }
-
-    public function is_logToMonitor() {
-        return $this->logToMonitor;
     }
 
     public function is_logToConsole() {
@@ -90,10 +78,6 @@ class configClass {
 
     public function is_logToFile() {
         return $this->logToFile;
-    }
-
-    public function is_logToDatabase() {
-        return $this->logToDatabase;
     }
 
     public function get_log() {

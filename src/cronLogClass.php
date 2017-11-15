@@ -56,18 +56,12 @@ class cronLogClass {
     public function log($message, $type = 'debug') {
         if ($this->debug == FALSE && $type == 'error')
             $this->messenger->sendEmailOnError($message);
-
-        if ($this->config->is_logToMonitor() == TRUE && $this->debug == FALSE)
-            $this->logToMonitor($type, $message);
-
+        
         if ($this->config->is_logToConsole() == TRUE || $this->debug == TRUE)
             $this->logToConsole($type, $message);
 
         if ($this->config->is_logToFile() == TRUE && $this->debug == FALSE)
             $this->logToFile($type, $message);
-
-        if ($this->config->is_logToDatabase() == TRUE)
-            $this->logToDatabase($type, $message);
     }
 
     /**
@@ -108,7 +102,7 @@ class cronLogClass {
      * @throws \InvalidArgumentException
      */
     public function logToConsole($type, $message) {
-        if (!defined('STDOUT')) {
+        if (! defined('STDOUT')) {
             return false;
         }
         $typeMap = array(
@@ -120,7 +114,7 @@ class cronLogClass {
             1 => array(32, '- success -')
         );
 
-        if (!array_key_exists($type, $typeMap))
+        if (! array_key_exists($type, $typeMap))
             throw new \InvalidArgumentException(' $type parameter must be debug, info, error or success. Got ' . $type);
 
 

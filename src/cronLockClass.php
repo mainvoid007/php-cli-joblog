@@ -29,7 +29,7 @@ class cronLockClass {
         $this->toggleLock();
 
         if ($this->getLock() === TRUE)
-            exit('ABBRUCH LOCK VORHANDEN');     //  TODO: Nachricht senden
+            exit('EXIT LOCK IS AVAILABLE');     //  TODO: Nachricht senden
         else
             $this->createLock();
     }
@@ -65,10 +65,18 @@ class cronLockClass {
         }
     }
 
+    /**
+     * 
+     * @return boolean
+     */
     private function getLock() {
         return $this->lock;
     }
 
+    /**
+     * 
+     * @return boolean
+     */
     private function checkLockTime() {
         if (filemtime($this->lockPathFile) + $this->lockTime * 60 < time()) {
             return TRUE;
