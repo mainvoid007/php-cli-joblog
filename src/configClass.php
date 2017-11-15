@@ -3,7 +3,7 @@
 /**
  * Description of configClass
  *
- * @author olaf
+ * @author mainvoid007
  */
 class configClass {
 
