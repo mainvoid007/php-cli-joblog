@@ -24,7 +24,7 @@
       }
 
       public function sendEmailOnError ( $message ) {
-          mail ( $this->config->get_liveSendEmailAddress (), $this->get_subjectString (), $this->get_message ( $message ) );
+          mail ( $this->config->adminEmail, $this->get_subjectString (), $this->get_message ( $message ) );
       }
 
       public function sendSmsOnError () {
@@ -46,10 +46,10 @@
        */
       private function get_firstLine () {
           $firstLine = "\n";
-          $firstLine .= "\nServer-IP : \t" . $this->config->get_serverIP ();
-          $firstLine .= "\nServer-Name : \t" . $this->config->get_serverName ();
-          $firstLine .= "\nPath to Lock-Folder : \t" . $this->config->get_pathToLockFolder ();
-          $firstLine .= "\nPath to Log-File-Folder : \t" . $this->config->get_pathToLogFileFolder ();
+          $firstLine .= "\nServer-IP : \t" . $this->config->serverIP;
+          $firstLine .= "\nServer-Name : \t" . $this->config->serverName;
+          $firstLine .= "\nPath to Lock-Folder : \t" . $this->config->pathToLockFolder;
+          $firstLine .= "\nPath to Log-File-Folder : \t" . $this->config->pathToLogFileFolder;
           return $firstLine;
       }
 
@@ -59,7 +59,7 @@
        * @return type
        */
       private function get_subjectString ( $pre = "ERROR ON - " ) {
-          return $pre . " ( " . $this->config->get_serverName () . " ) " . $this->extractFileNameFromPath ( $this->filePath );
+          return $pre . " ( " . $this->config->serverName . " ) " . $this->extractFileNameFromPath ( $this->filePath );
       }
 
       /**

@@ -28,6 +28,10 @@ class cronLogClass {
         $this->debug = $debug;
         $this->filePath = $pathToCronjob;
         $this->config = new configClass($pathToCronjob);
+        $this->checkPaths(array(
+            $this->config->pathToLogFileFolder,
+            $this->config->pathToLockFolder)
+        );
         $this->setMessenger();
         $this->setLock();
     }
@@ -57,10 +61,10 @@ class cronLogClass {
         if ($this->debug == FALSE && $type == 'error')
             $this->messenger->sendEmailOnError($message);
         
-        if ($this->config->is_logToConsole() == TRUE || $this->debug == TRUE)
+        if ($this->config->logToConsole == TRUE || $this->debug == TRUE)
             $this->logToConsole($type, $message);
 
-        if ($this->config->is_logToFile() == TRUE && $this->debug == FALSE)
+        if ($this->config->logToFile == TRUE && $this->debug == FALSE)
             $this->logToFile($type, $message);
     }
 
@@ -122,6 +126,25 @@ class cronLogClass {
         fwrite(STDOUT, $time . "\033[" . $typeMap[$type][0] . "m" . $typeMap[$type][1] . "\033[37m  " . $message . "\r\n");
     }
 
+    /**
+     * Check and create directories for log/lock files
+     * @param array $paths
+     * @throws Exception
+     */
+    private function checkPaths(array $paths){
+        foreach($paths as $path){
+            if( FALSE === is_dir($path) ){
+                try {
+                    if( FALSE === mkdir($path, 0500) ){
+                        throw new Exception("Can't create {$path}");
+                    }
+                } catch (Exception $e) {
+                    $e->getMessage();
+                    $e->getLine();
+                }
+            }
+        } 
+    }
 }
 
 ?>

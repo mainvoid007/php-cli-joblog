@@ -23,8 +23,8 @@
        */
       public function __construct ( configClass $config ) {
           $this->config = $config;
-          $this->pathToLogFileFolder = $this->config->get_pathToLogFileFolder ();
-          $this->fileNameWithoutExtension = $this->config->get_fileNameWithoutExtension ();
+          $this->pathToLogFileFolder = $this->config->pathToLogFileFolder;
+          $this->fileNameWithoutExtension = $this->config->fileNameWithoutExtension;
           $this->createHandler ();
       }
 

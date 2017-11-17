@@ -16,15 +16,15 @@ class cronLockClass {
 
     public function __construct(configClass $config, $messenger) {
         $this->config = $config;
-        $this->lockPath = $config->get_pathToLockFolder();
-        $this->fileName = $this->config->get_fileNameWithoutExtension() . ".lock";
+        $this->lockPath = $config->pathToLockFolder;
+        $this->fileName = $this->config->fileNameWithoutExtension . ".lock";
         $this->lockPathFile = $this->lockPath . "/" . $this->fileName;
         $this->lockTime = time();
         $this->messenger = $messenger;
         $this->toggleLock();
 
         if ($this->getLock() === TRUE)
-            exit('EXIT LOCK IS AVAILABLE');     //  TODO: Nachricht senden
+            exit('EXIT LOCK IS AVAILABLE');     //  TODO: send message
         else
             $this->createLock();
     }
@@ -73,9 +73,9 @@ class cronLockClass {
      * @return boolean
      */
     private function checkLockTime() {
-        if (filemtime($this->lockPathFile) + $this->lockTime * 60 < time()) {
-            return TRUE;
-        }
+            if (filemtime($this->lockPathFile) + $this->lockTime * 60 < time()) {
+                return FALSE;
+            } 
         return FALSE;
     }
 
