@@ -7,19 +7,8 @@
  */
 class configClass {
 
-    private $serverName;
-    private $serverIP;
-    private $adminEmail;
-    private $pathToLockFolder;
-    private $logToConsole;
-    private $logToFile;
-    private $log;
-    private $pathToLogFileFolder;
-    private $liveSendEmailOnError;
     private $fileName;
     private $fileNameWithoutExtension;
-    private $overwrite;
-    private $overwriteTimeInMinutes;
 
     /**
      * 
